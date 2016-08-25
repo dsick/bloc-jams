@@ -10,7 +10,7 @@ var animatePoints = function(points) {
         points[index].style.WebkitTransform = "scaleX(1) translateY(0)";
     };    
 
-    for (var i = 0; i < points.length, i++;) {
+    for (var i = 0; points.length - 1; i++) {
         revealPoint(i);
     };
 };
@@ -29,8 +29,4 @@ window.onload = function() {
          }
      });
  
-//         if (document.documentElement.scrollTop || document.body.scrollTop >= scrollDistance) {
-//             animatePoints(pointsArray);   
-//         }
-    //});
  }
