@@ -30,6 +30,22 @@
      ]
  };
 
+// Another My Album
+ var albumSick = {
+     title: 'The Way It Is',
+     artist: 'Dave Sick',
+     label: 'DS',
+     year: '2016',
+     albumArtUrl: 'assets/images/album_covers/03.png',
+     songs: [
+         { title: 'That is the way it is', duration: '2:22' },
+         { title: 'Holy smokies', duration: '3:21' },
+         { title: 'Run, run, run', duration: '1:99'},
+         { title: 'Is anybody out there?', duration: '4:12' },
+         { title: 'DSSDS', duration: '2:34'}
+     ]
+ };
+
 var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
@@ -64,7 +80,29 @@ var setCurrentAlbum = function(album) {
          albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
      }
  };
+
+
  
- window.onload = function() {
-     setCurrentAlbum(albumPicasso);
- };
+window.onload = function() {
+    setCurrentAlbum(albumPicasso);
+    var albumCover = document.getElementsByClassName('album-cover-art');
+    albumCover[0].addEventListener("click", nextAlbum, false);
+};
+
+var currentAlbum = albumPicasso;
+var nextAlbum = function() {
+    switch (currentAlbum){
+        case albumPicasso:
+            currentAlbum = albumMarconi;
+            break;
+        case albumMarconi:
+            currentAlbum = albumSick;
+            break;
+        case albumSick:
+            currentAlbum = albumPicasso;
+            break;
+            
+    }
+    setCurrentAlbum(currentAlbum);
+        
+};
