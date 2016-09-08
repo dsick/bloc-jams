@@ -101,19 +101,23 @@ var updatePlayerBar = function() {
 }
 
 var setSongButton = function(direction) {
-    var getLastSongNumber = function(index) {
-        return index == 0 ? currentAlbum.songs.length : index;
-    };
+    
     
     var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
     
     if (direction === 'previous') {
+        var getLastSongNumber = function(index) {
+            return index == (currentAlbum.songs.length - 1) ? 1 : index + 2;
+        };
         currentSongIndex--;
         if (currentSongIndex < 0) {
         currentSongIndex = currentAlbum.songs.length - 1;
         }
     }
     else if (direction === 'next'){
+        var getLastSongNumber = function(index) {
+            return index == 0 ? currentAlbum.songs.length : index;
+        };
         currentSongIndex++;
         if (currentSongIndex >= currentAlbum.songs.length) {
         currentSongIndex = 0;
@@ -138,8 +142,8 @@ var setSongButton = function(direction) {
     $lastSongNumberCell.html(lastSongNumber);
 }
 
-//var nextSong = function() {
-//    
+var nextSong = function() {
+    setSongButton('next')
 //    var getLastSongNumber = function(index) {
 //        return index == 0 ? currentAlbum.songs.length : index;
 //    };
@@ -169,10 +173,10 @@ var setSongButton = function(direction) {
 //    $nextSongNumberCell.html(pauseButtonTemplate);
 //    $lastSongNumberCell.html(lastSongNumber);
 //    
-//};
-//
-//var previousSong = function() {
-//    
+};
+
+var previousSong = function() {
+    setSongButton('previous')
 //    // Note the difference between this implementation and the one in
 //    // nextSong()
 //    var getLastSongNumber = function(index) {
@@ -203,8 +207,8 @@ var setSongButton = function(direction) {
 //    
 //    $previousSongNumberCell.html(pauseButtonTemplate);
 //    $lastSongNumberCell.html(lastSongNumber);
-//    
-//};
+    
+};
 
 var updatePlayerBarSong = function() {
 
@@ -233,7 +237,9 @@ var $nextButton = $('.main-controls .next');
 
 $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
-    $previousButton.click(setSongButton('previous'));
-    $nextButton.click(setSongButton('next'));
+    $previousButton.click(previousSong);
+    $nextButton.click(nextSong);
+//    $previousButton.click('setSongButton('previous')');
+//    $nextButton.click('setSongButton('next')');
     
 });
